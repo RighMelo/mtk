@@ -33,13 +33,6 @@ define Package/mtk-luci-plugin/config
 	default y
 	help
 	  "LuCI plugin to manipulate MTK WiFi drivers"
-
-	config LUCI_APP_WEBCONSOLE
-	bool "luci-app-webconsole"
-	depends on PACKAGE_mtk-luci-plugin
-	default y
-	help
-	  "LuCI plugin for access shell from web"
 endef
 
 define Build/Compile
@@ -68,7 +61,6 @@ endef
 
 define Package/mtk-luci-plugin/install
 	$(call Package/common/install,$(1),luci-app-mtkwifi)
-	$(call Package/common/install,$(1),luci-app-webconsole)
 endef
 
 
