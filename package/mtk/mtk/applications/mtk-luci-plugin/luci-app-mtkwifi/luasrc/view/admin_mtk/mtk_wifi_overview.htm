@@ -11,7 +11,7 @@
 local mtkwifi = require("mtkwifi")
 local devs = mtkwifi.get_all_devs()
 %>
-    <h2><a name="content">无线概况</a></h2>
+    <h2><a name="content">无 线 概 况</a></h2>
 
     <div id="loading" style="margin-top: 1em; display: none;">
     <img src="<%=resource%>/icons/loading.gif" alt="<%:Loading%>" style="vertical-align:e;" />
@@ -34,7 +34,8 @@ local devs = mtkwifi.get_all_devs()
                         <img src="/luci-static/resources/icons/wifi_big.png" style="float:left; margin-right:10px" />
                     </td>
                     <td colspan="2" style="text-align:left">
-                        <big><strong title="<%=dev.profile%>">   <%=dev.devname%></strong></big>
+                        <big><strong title="<%=dev.profile%>"> <% if dev.devname == "mt7615.1.2G" then %> 无线 2.4G <% else %> 无线 5G<% end %></strong></big>
+						<br></br>
                         <%
                         local diff = mtkwifi.diff_profile(dev.profile)
                         if next(diff) ~= nil then
