@@ -117,7 +117,7 @@ if next(diff) ~= nil then
             </tr>
             <% end %>
             <tr>
-                <td>信道带宽</td>
+                <td>频宽</td>
                 <td>
                     <select style="width:auto" name="__bw" id="__bw" onchange="Bw_onchange(this.options[this.options.selectedIndex].value)">
                         <option value="20" <% if dev.__bw == "20" then %> selected="selected"<% end%>>20 MHz</option>
@@ -395,8 +395,8 @@ if next(diff) ~= nil then
     </fieldset>
     <div class="cbi-page-actions">
         <input class="cbi-button cbi-button-reset" value="重置" onclick="location.href='<%=luci.dispatcher.build_url("admin", "network", "wifi", "dev_cfg_view", devname)%>'" type="button" />
-        <input class="cbi-button cbi-button-apply" id="save" value="保存" type="submit" onclick="if (confirm('You are going to overwrite the profile directly, are you sure?')) return true; else return false;" />
-        <input class="cbi-button cbi-button-apply" id="reset" value="将配置文件还原为出厂设置" type="button" onclick="if (confirm('You are going to reset the profile of <%=devname%> to factory default, are you sure?')) location.href='<%=luci.dispatcher.build_url("admin", "network", "wifi", "dev_cfg_reset", devname)%>'" />
+        <input class="cbi-button cbi-button-apply" id="save" value="保存" type="submit" onclick="if (confirm('您确定要直接覆盖配置文件吗?')) return true; else return false;" />
+        <input class="cbi-button cbi-button-apply" id="reset" value="将配置文件还原为出厂设置" type="button" onclick="if (confirm('您确定要将 <%=devname%> 的配置文件重置为出厂默认值吗?')) location.href='<%=luci.dispatcher.build_url("admin", "network", "wifi", "dev_cfg_reset", devname)%>'" />
     </div>
 </form>
 
@@ -522,7 +522,7 @@ if next(diff) ~= nil then
             } else if (is_mode_aband(mode)) {
                 cr = "<%=cfgs.CountryRegionABand%>";
             } else {
-                alert("Cannot get valid CountryRegion from invalid WireleeMode");
+                alert("无法获取有效的国家地区");
             }
         }
 
@@ -598,7 +598,7 @@ if next(diff) ~= nil then
         if (select.length > 0)
             select.disabled = false;
         else
-            alert("[Warning] 5G 2nd 80Mhz Channel is not available. Please Check CountryRegion.");
+            alert("[警告] Wifi 5G网络80MHz信道不可用。请检查国家地区设置.");
     }
 
     function get5G2nd80MhzChannelList(bw, ch) {
@@ -640,7 +640,7 @@ if next(diff) ~= nil then
         if (select.length > 0)
             select.disabled = false;
         else
-            alert("[Warning] 2G 40Mhz Ext Channel is not avalable. Please Check CountryRegion.");
+            alert("[警告]Wifi 2.4G网络 40MHz Ext频道不可用。请检查国家地区设置.");
         }
 
     function getHTExtChannel(bw, ch) {
