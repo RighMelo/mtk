@@ -1,0 +1,4 @@
+
+config unblockmusic
+	option enabled '0'
+	option musicapptype 'kuwo'

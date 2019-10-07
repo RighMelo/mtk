@@ -13,6 +13,9 @@ msgstr "停用"
 msgid "Log"
 msgstr "日志"
 
+msgid "Kill BT"
+msgstr "关闭BT端口"
+
 msgid "ShadowSocksR is running"
 msgstr "ShadowSocksR 客户端运行中"
 
@@ -51,6 +54,11 @@ msgstr "服务器端口"
 
 msgid "Local Port"
 msgstr "本地端口"
+msgid "Prohibit downloading tool ports through proxy"
+msgstr "关闭BT下载端口"
+
+msgid "BT Port"
+msgstr "BT端口"
 
 msgid "Connection Timeout"
 msgstr "连接超时"
