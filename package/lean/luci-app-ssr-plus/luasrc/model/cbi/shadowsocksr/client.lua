@@ -99,8 +99,6 @@ o.default = "1236:65535"
 o.rmempty = true
 o:depends("bt", "1")
 
-o = s:option(Button,"check_port",translate("Check Server Port"))
-o.template = "shadowsocksr/checkport"
 o.value =translate("No Check")
 m:section(SimpleSection).template  = "shadowsocksr/myip"
 
