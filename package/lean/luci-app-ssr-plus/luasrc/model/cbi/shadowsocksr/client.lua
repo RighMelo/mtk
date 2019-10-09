@@ -67,11 +67,9 @@ o.default = 1
 o = s:option(ListValue, "pdnsd_enable", translate("Resolve Dns Mode"))
 o:value("1", translate("Use Pdnsd tcp query and cache"))
 o:value("0", translate("Use Local DNS Service listen port 5335"))
-o:value("2", translate("Use system settings"))
 o.default = 1
 
-o = s:option(Value, "tunnel_forward", translate("Anti-pollution DNS Server"))
-o:value("0.0.0.0:53", translate("Using System Default DNS"))
+o = s:option(ListValue, "tunnel_forward", translate("Anti-pollution DNS Server"))
 o:value("8.8.4.4:53", translate("Google Public DNS (8.8.4.4)"))
 o:value("8.8.8.8:53", translate("Google Public DNS (8.8.8.8)"))
 o:value("208.67.222.222:53", translate("OpenDNS (208.67.222.222)"))
@@ -86,20 +84,5 @@ o:value("1.1.1.1:53", translate("Cloudflare DNS (1.1.1.1)"))
 o:value("114.114.114.114:53", translate("Oversea Mode DNS-1 (114.114.114.114)"))
 o:value("114.114.115.115:53", translate("Oversea Mode DNS-2 (114.114.115.115)"))
 o:depends("pdnsd_enable", "1")
-
-o.default = "8.8.8.8:53"
-
-o = s:option(Flag, "bt", translate("Kill BT"))
-o.default = 0
-o.rmempty = false
-o.description = translate("Prohibit downloading tool ports through proxy")
-
-o = s:option(Value, "bt_port", translate("BT Port"))
-o.default = "1236:65535"
-o.rmempty = true
-o:depends("bt", "1")
-
-o.value =translate("No Check")
-m:section(SimpleSection).template  = "shadowsocksr/myip"
 
 return m

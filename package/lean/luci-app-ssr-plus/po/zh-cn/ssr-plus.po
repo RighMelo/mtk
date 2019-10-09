@@ -13,9 +13,6 @@ msgstr "停用"
 msgid "Log"
 msgstr "日志"
 
-msgid "Kill BT"
-msgstr "关闭BT端口"
-
 msgid "ShadowSocksR is running"
 msgstr "ShadowSocksR 客户端运行中"
 
@@ -54,11 +51,6 @@ msgstr "服务器端口"
 
 msgid "Local Port"
 msgstr "本地端口"
-msgid "Prohibit downloading tool ports through proxy"
-msgstr "关闭BT下载端口"
-
-msgid "BT Port"
-msgstr "BT端口"
 
 msgid "Connection Timeout"
 msgstr "连接超时"
@@ -407,7 +399,7 @@ msgid "Auto Update Server subscription, GFW list and CHN route"
 msgstr "自动更新服务器订阅、GFW列表和 CHN路由表"
 
 msgid "Subscribe URL"
-msgstr "SSR/V2RAY订阅URL地址"
+msgstr "SS/SSR/V2RAY订阅URL地址"
 
 msgid "Update"
 msgstr "更新"
@@ -516,3 +508,6 @@ msgstr "所有端口（默认）"
 
 msgid "Only Common Ports"
 msgstr "仅常用端口（不走P2P流量到代理）"
+
+msgid "Ping Latency"
+msgstr "Ping延迟"
