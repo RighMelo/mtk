@@ -16,6 +16,7 @@ _VER_REV := $(shell cat "./version/.VER_REV")
 _VER_PTH := $(shell cat "./version/.VER_PTH")
 
 PKG_NAME:=UnblockNeteaseMusic
+<<<<<<< HEAD
 PKG_VERSION:=$(_VER_MAJ).$(_VER_MIN).$(_VER_REV)
 PKG_RELEASE:=$(_VER_PTH)
 
@@ -25,6 +26,21 @@ PKG_SOURCE_URL:=https://github.com/nondanee/UnblockNeteaseMusic/archive/
 PKG_SOURCE:=v$(PKG_VERSION).tar.gz
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_HASH:=skip
+=======
+PKG_VERSION:=0.20.0
+PKG_RELEASE:=1
+
+PKG_LICENSE:=MIT
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/nondanee/UnblockNeteaseMusic.git
+PKG_SOURCE_VERSION:=3de1af9d4c9e32de70ed8abe7bf63a6f2275bea8
+
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)
+PKG_SOURCE:=$(PKG_SOURCE_SUBDIR)-$(PKG_VERSION).tar.gz
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_SUBDIR)
+PKG_BUILD_PARALLEL:=1
+>>>>>>> b0974d6ec5fe6f9f8d9f55c74c5c17319d78989d
 
 include $(INCLUDE_DIR)/package.mk
 
