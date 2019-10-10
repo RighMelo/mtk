@@ -15,13 +15,15 @@ enabled.description = translate("启用后，路由器自动分流解锁，大�
 
 speedtype = s:option(ListValue, "musicapptype", translate("音源选择"))
 speedtype:value("default", translate("默认"))
-speedtype:value("netease", translate("网易云音乐"))
 speedtype:value("qq", translate("QQ音乐"))
 speedtype:value("xiami", translate("虾米音乐"))
 speedtype:value("baidu", translate("百度音乐"))
 speedtype:value("kugou", translate("酷狗音乐"))
-speedtype:value("kuwo", translate("酷我音乐(高音质推荐)"))
+speedtype:value("kuwo", translate("酷我音乐(推荐)"))
 speedtype:value("migu", translate("咕咪音乐"))
 speedtype:value("joox", translate("JOOX音乐"))
+
+enabled=s:option(DummyValue,"opennewwindow" , 
+	translate("<input type=\"button\" class=\"cbi-button cbi-button-apply\" value=\"使用教程\" onclick=\"window.open('https://github.com/maxlicheng/luci-app-unblockmusic')\" />"))
 
 return mp
