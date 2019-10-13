@@ -1,5 +1,8 @@
 -- Licensed to the public under the GNU General Public License v3.
-
+local d = require "luci.dispatcher"
+local fs = require "nixio.fs"
+local sys = require "luci.sys"
+local uci = require "luci.model.uci".cursor()
 local m, s, o
 local shadowsocksr = "shadowsocksr"
 
@@ -11,53 +14,17 @@ end)
 
 m = Map(shadowsocksr,  translate("Servers subscription and manage"))
 
--- Server Subscribe
-
-s = m:section(TypedSection, "server_subscribe")
-s.anonymous = true
-
-o = s:option(Flag, "auto_update", translate("Auto Update"))
-o.rmempty = false
-o.description = translate("Auto Update Server subscription, GFW list and CHN route")
 
 
-o = s:option(ListValue, "auto_update_time", translate("Update time (every day)"))
-for t = 0,23 do
-o:value(t, t..":00")
-end
-o.default=2
-o.rmempty = false
-
-o = s:option(DynamicList, "subscribe_url", translate("Subscribe URL"))
-o.rmempty = true
-
-o = s:option(Flag, "proxy", translate("Through proxy update"))
-o.rmempty = false
-o.description = translate("Through proxy update list, Not Recommended ")
-
-o = s:option(Button,"update",translate("Update"))
-o.inputstyle = "reload"
-o.write = function()
-  luci.sys.call("bash /usr/share/shadowsocksr/subscribe.sh >>/tmp/ssrplus.log 2>&1")
-  luci.http.redirect(luci.dispatcher.build_url("admin", "services", "shadowsocksr", "servers"))
-end
-
-o = s:option(Button,"delete",translate("Delete all severs"))
-o.inputstyle = "reset"
-o.description = string.format(translate("Server Count") ..  ": %d", server_count)
-o.write = function()
-  uci:delete_all("shadowsocksr", "servers", function(s) return true end)
-  uci:save("shadowsocksr") 
-  luci.sys.call("uci commit shadowsocksr && /etc/init.d/shadowsocksr stop") 
-  luci.http.redirect(luci.dispatcher.build_url("admin", "services", "shadowsocksr", "servers"))
-end
-
+m:section(SimpleSection).template  = "shadowsocksr/status"
 -- [[ Servers Manage ]]--
 s = m:section(TypedSection, "servers")
 s.anonymous = true
 s.addremove = true
-s.sortable = false
+s.sortable = true
 s.template = "cbi/tblsection"
+s.description = string.format(translate("Server Count") ..  ": %d", server_count)
+
 s.extedit = luci.dispatcher.build_url("admin/services/shadowsocksr/servers/%s")
 function s.create(...)
 	local sid = TypedSection.create(...)
@@ -82,6 +49,10 @@ function o.cfgvalue(...)
 	return Value.cfgvalue(...) or "?"
 end
 
+o = s:option(DummyValue, "encrypt_method", translate("Encrypt Method"))
+o.width="10%"
+
+
 o = s:option(DummyValue, "server_port", translate("Server Port"))
 function o.cfgvalue(...)
 	return Value.cfgvalue(...) or "?"
@@ -89,7 +60,7 @@ end
 
 if nixio.fs.access("/usr/bin/kcptun-client") then
 
-o = s:option(DummyValue, "kcp_enable", translate("KcpTun"))
+o = s:option(Flag, "kcp_enable", translate("KcpTun"))
 function o.cfgvalue(...)
 	return Value.cfgvalue(...) or "?"
 end
@@ -101,9 +72,11 @@ function o.cfgvalue(...)
 	return Value.cfgvalue(...) or "0"
 end
 
+
 o = s:option(DummyValue,"server",translate("Ping Latency"))
 o.template="shadowsocksr/ping"
 o.width="10%"
+
 
 m:append(Template("shadowsocksr/server_list"))
 return m

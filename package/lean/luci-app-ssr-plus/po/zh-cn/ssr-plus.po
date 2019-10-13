@@ -13,6 +13,9 @@ msgstr "停用"
 msgid "Log"
 msgstr "日志"
 
+
+
+
 msgid "ShadowSocksR is running"
 msgstr "ShadowSocksR 客户端运行中"
 
@@ -37,8 +40,21 @@ msgstr "与全局服务器相同"
 msgid "Servers Setting"
 msgstr "服务器配置"
 
+
+msgid "Use Config File"
+msgstr "使用配置文件"
+
+
+
+msgid "Kcptun"
+msgstr "Kcptun开关"
+
 msgid "Alias(optional)"
 msgstr "别名（可选）"
+
+
+msgid "Aliasd"
+msgstr "节点备注"
 
 msgid "Onetime Authentication"
 msgstr "一次验证"
@@ -51,6 +67,13 @@ msgstr "服务器端口"
 
 msgid "Local Port"
 msgstr "本地端口"
+
+msgid "weight"
+msgstr "比重"
+
+msgid "Ping Latency"
+msgstr "Ping 延迟"
+
 
 msgid "Connection Timeout"
 msgstr "连接超时"
@@ -122,7 +145,7 @@ msgid "SSR Server"
 msgstr "服务端"
 
 msgid "ShadowSocksR Server"
-msgstr "ShadowSocksR 服务端"
+msgstr "SS/SSR/V2RAY 服务端"
 
 msgid "ShadowSocksR Server is running"
 msgstr "ShadowSocksR 服务端运行中"
@@ -169,8 +192,56 @@ msgstr "别名"
 msgid "SOCKS5 Proxy"
 msgstr "SOCKS5代理"
 
+msgid "SSOCKS5 Proxy"
+msgstr "SS SOCKS5代理"
+
+
+msgid "Appointlist List"
+msgstr "指定列表"
+
+msgid "V2 Edition"
+msgstr "V2版本"
+
+msgid "Upgrade V2ray"
+msgstr "V2ray更新"
+
 msgid "Server"
 msgstr "服务器"
+
+msgid "V2SOCKS5 Proxy"
+msgstr "V2SOCKS5代理"
+
+msgid "Global V2RAY Server"
+msgstr "V2RAY服务端"
+
+msgid "Enable V2ray Update"
+msgstr "启用V2ray更新"
+
+
+
+msgid "Update_V2ray"
+msgstr "更新V2ray"
+
+msgid "Edition"
+msgstr "版本"
+
+msgid "auto detected"
+msgstr "自动检测版本"
+
+
+msgid "Update"
+msgstr "更新"
+
+msgid "haProxy settings"
+msgstr "HaProxy 设置"
+
+
+msgid "Enabling the Management Console"
+msgstr "启用管理控制台"
+
+msgid "Service Port"
+msgstr "端口"
+
 
 msgid "TCP Fast Open"
 msgstr "TCP快速打开"
@@ -199,6 +270,55 @@ msgstr "IPK 版本号"
 msgid "KcpTun Version"
 msgstr "KcpTun 版本号"
 
+msgid "udp2raw tunnel"
+msgstr "udp2raw 隧道"
+
+msgid "Enable udp2raw"
+msgstr "启用 udp2raw"
+
+msgid "Seq Mode"
+msgstr "Seq 模式"
+
+msgid "udp2raw Version"
+msgstr "udp2raw 版本"
+
+msgid "udp2raw tunnel Project"
+msgstr "udp2raw 项目"
+
+
+msgid "UDPspeeder Version"
+msgstr "UDPspeeder 版本"
+
+
+msgid "UDPspeeder Project"
+msgstr "UDPspeeder 项目"
+
+
+msgid "Enable UDPspeeder"
+msgstr "启用 UDPspeeder"
+
+msgid "Speeder Mode"
+msgstr "Speeder 模式"
+
+msgid "Mtu"
+msgstr "Mtu 参数"
+
+
+msgid "AlterId"
+msgstr "额外ID"
+
+
+msgid "VmessId (UUID)"
+msgstr "用户ID(UUID)"
+
+
+msgid "Subscription Managenent"
+msgstr "订阅管理"
+
+msgid "Automatic Switching"
+msgstr "自动切换"
+
+
 msgid "Not exist"
 msgstr "未安装可执行文件"
 
@@ -221,16 +341,16 @@ msgid "Running Mode"
 msgstr "运行模式"
 
 msgid "IP Route Mode"
-msgstr "绕过中国大陆IP模式"
+msgstr "中国大陆白名单模式"
 
 msgid "GFW List Mode"
 msgstr "GFW列表模式"
 
 msgid "Global Mode"
-msgstr "全局模式"
+msgstr "全局代理模式"
 
 msgid "Oversea Mode"
-msgstr "海外用户回国模式"
+msgstr "海外用户回国IP路由模式"
 
 msgid "Router Proxy"
 msgstr "路由器访问控制"
@@ -341,6 +461,9 @@ msgstr "使用Pdnsd"
 msgid "Use Other DNS Tunnel(Need to install)"
 msgstr "使用其他DNS转发(需要自己安装)"
 
+msgid "Ping"
+msgstr "Ping延迟"
+
 msgid "Import SSR"
 msgstr "导入ssr配置信息"
 
@@ -377,8 +500,18 @@ msgstr "通过代理更新"
 msgid "GFW List"
 msgstr "GFW列表"
 
+msgid "Servers List"
+msgstr "服务器列表"
+
+msgid "Server settings"
+msgstr "服务器设置"
+
+msgid "Link"
+msgstr "SS/SSR/Vmess链接"
+
+
 msgid "ShadowSocksR Plus+ Settings"
-msgstr "ShadowSocksR Plus+ 设置（支持SS/SSR/V2RAY）"
+msgstr "ShadowSocksR Plus+ （支持SS/SSR/V2RAY）"
 
 msgid "Main Server"
 msgstr "主服务器"
@@ -386,8 +519,40 @@ msgstr "主服务器"
 msgid "Anti-pollution DNS Server"
 msgstr "访问国外域名DNS服务器"
 
+msgid "Use Pdnsd udp query and cache"
+msgstr "使用PDNSD UDP查询并缓存"
+
 msgid "Use Pdnsd tcp query and cache"
 msgstr "使用PDNSD TCP查询并缓存"
+
+msgid "Use https_dns_proxy query and cache"
+msgstr "使用https_dns_proxy TCP查询并缓存"
+
+msgid "Use smartdns query and cache"
+msgstr "使用SmartDNS TCP查询并缓存"
+
+
+msgid "Kill BT"
+msgstr "禁止  BT"
+
+msgid "BT Port"
+msgstr "BT 端口"
+
+
+
+msgid "Prohibit downloading tool ports through proxy"
+msgstr "禁止BT端口走代理"
+
+
+msgid "Domain White List"
+msgstr "域名白名单"
+
+
+msgid "Domain name (keyword only)"
+msgstr "域名（仅限关键字）"
+
+
+
 
 msgid "DNS Server IP:Port"
 msgstr "DNS服务器 IP:Port"
@@ -399,10 +564,35 @@ msgid "Auto Update Server subscription, GFW list and CHN route"
 msgstr "自动更新服务器订阅、GFW列表和 CHN路由表"
 
 msgid "Subscribe URL"
-msgstr "SS/SSR/V2RAY订阅URL地址"
+msgstr "SSR/V2RAY订阅URL地址"
 
-msgid "Update"
-msgstr "更新"
+
+
+msgid "Oversea IP Route Mode"
+msgstr "海外用户回国IP路由模式"
+
+msgid "Use Local DNS Service"
+msgstr "使用设定DNS解析"
+
+msgid "Using System Default DNS"
+msgstr "使用系统默认DNS"
+
+
+msgid "Global SS Server"
+msgstr "SS服务端"
+
+msgid "Enabling IPv6 server"
+msgstr "启用ipv6服务"
+
+msgid "HTTP Proxy"
+msgstr "HTTP代理"
+
+msgid "Enable HTTP Proxy"
+msgstr "启用HTTP代理"
+
+msgid "HTTP Port"
+msgstr "HTTP代理端口"
+
 
 msgid "Server Count"
 msgstr "服务器节点数量"
@@ -447,7 +637,7 @@ msgid "Please refer to the following writing"
 msgstr "每行一个域名，无需写前面的 HTTP(S):// ，提交后即时生效"
 
 msgid "Servers subscription and manage"
-msgstr "服务器节点订阅与管理（支持订阅和手动导入SSR链接）"
+msgstr "服务器节点订阅与管理（支持订阅和手动导入SSR/Vmess链接）"
 
 msgid "Through proxy update list, Not Recommended"
 msgstr "通过路由器自身代理更新订阅（不推荐）"
@@ -469,6 +659,27 @@ msgstr "删除所有服务器"
 
 msgid "Severs Nodes"
 msgstr "服务器节点"
+
+msgid "Use dnscrypt-proxy query and cache"
+msgstr "使用dnscrypt-proxy TCP查询并缓存"
+
+msgid "Use dnsforwarder tcp query and cache"
+msgstr "使用dnsforwarder TCP查询并缓存"
+
+msgid "Use dnsforwarder udp query and cache"
+msgstr "使用dnsforwarder UDP查询并缓存"
+
+
+msgid "Use chinadns query and cache"
+msgstr "使用ChinaDNS查询并缓存"
+
+msgid "Chiadns Resolve Dns Mode"
+msgstr "ChinaDNS的上游服务器"
+
+
+msgid "Use Local DNS Service"
+msgstr "使用设定DNS解析"
+
 
 msgid "Use Local DNS Service listen port 5335"
 msgstr "使用本机端口为5335的DNS服务"
@@ -499,15 +710,3 @@ msgstr "4 线程"
 
 msgid "8 Threads"
 msgstr "8 线程"
-
-msgid "Proxy Ports"
-msgstr "需要代理的端口"
-
-msgid "All Ports"
-msgstr "所有端口（默认）"
-
-msgid "Only Common Ports"
-msgstr "仅常用端口（不走P2P流量到代理）"
-
-msgid "Ping Latency"
-msgstr "Ping延迟"
