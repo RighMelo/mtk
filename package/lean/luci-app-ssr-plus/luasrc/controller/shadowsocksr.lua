@@ -36,8 +36,11 @@ function index()
 		entry({"admin", "services", "shadowsocksr", "check"}, call("check_status"))
 		entry({"admin", "services", "shadowsocksr", "refresh"}, call("refresh_data"))
 		entry({"admin", "services", "shadowsocksr", "checkport"}, call("check_port"))
+        entry({"admin", "services", "shadowsocksr", "checkports"}, call("check_ports"))
+		entry({"admin", "services", "shadowsocksr", "change"}, call("change_node"))		
 		entry({"admin", "services", "shadowsocksr", "log"},form("shadowsocksr/log"),_("Log"), 80).leaf = true
 		entry({"admin", "services", "shadowsocksr", "run"},call("act_status")).leaf=true
+		entry({"admin", "services", "shadowsocksr", "allserver"}, call("get_servers"))
 		entry({"admin", "services", "shadowsocksr", "ping"}, call("act_ping")).leaf=true
 
 end
@@ -205,6 +208,35 @@ function refresh_data()
 	luci.http.write_json({ ret=retstring ,retcount=icount})
 end
 
+function get_servers()
+    local uci = luci.model.uci.cursor()
+    local server_table = {}
+    uci:foreach("shadowsocksr", "servers", function(s)
+        s["name"] = s[".name"]
+        table.insert(server_table,s)
+    end)
+    luci.http.prepare_content("application/json")
+    luci.http.write_json(server_table)
+end
+
+function change_node()
+    local e={}
+    local uci = luci.model.uci.cursor()
+    local sid = luci.http.formvalue("set")
+    local name = ""
+    uci:foreach("shadowsocksr", "global", function(s)
+        name = s[".name"]
+    end)
+    e.status = false
+    if sid ~= "" then
+    uci:set("shadowsocksr", name, "global_server" , sid)
+    luci.sys.call("uci commit shadowsocksr && /etc/init.d/shadowsocksr restart")
+    e.status = true
+    end
+    luci.http.prepare_content("application/json")
+    luci.http.write_json(e)
+end
+
 function act_ping()
 	local e={}
 	e.index=luci.http.formvalue("index")
@@ -213,41 +245,74 @@ function act_ping()
 	luci.http.write_json(e)
 end
 
+function check_ports()
+    local set = ""
+    local retstring = "<br /><br />"
+    local s
+    local server_name = ""
+    local shadowsocksr = "shadowsocksr"
+    local uci = luci.model.uci.cursor()
+    local iret = 1
+
+    uci:foreach(
+        shadowsocksr,
+        "servers",
+        function(s)
+            if s.alias then
+                server_name = s.alias
+            elseif s.server and s.server_port then
+                server_name = "%s:%s" % {s.server, s.server_port}
+            end
+            iret = luci.sys.call(" ipset add ss_spec_wan_ac " .. s.server .. " 2>/dev/null")
+            socket = nixio.socket("inet", "stream")
+            socket:setopt("socket", "rcvtimeo", 3)
+            socket:setopt("socket", "sndtimeo", 3)
+            ret = socket:connect(s.server, s.server_port)
+            if tostring(ret) == "true" then
+                socket:close()
+                retstring = retstring .. "<font color='green'>[" .. server_name .. "] OK.</font><br />"
+            else
+                retstring = retstring .. "<font color='red'>[" .. server_name .. "] Error.</font><br />"
+            end
+            if iret == 0 then
+                luci.sys.call(" ipset del ss_spec_wan_ac " .. s.server)
+            end
+        end
+    )
+
+    luci.http.prepare_content("application/json")
+    luci.http.write_json({ret = retstring})
+end
 
 function check_port()
-	local set=""
-	local retstring="<br /><br />"
-	local s
-	local server_name = ""
-	local shadowsocksr = "shadowsocksr"
-	local uci = luci.model.uci.cursor()
-	local iret=1
-
-	uci:foreach(shadowsocksr, "servers", function(s)
-
-		if s.alias then
-			server_name=s.alias
-		elseif s.server and s.server_port then
-			server_name= "%s:%s" %{s.server, s.server_port}
-		end
-
-		iret=luci.sys.call(" ipset add ss_spec_wan_ac " .. s.server .. " 2>/dev/null")
-		socket = nixio.socket("inet", "stream")
-		socket:setopt("socket", "rcvtimeo", 3)
-		socket:setopt("socket", "sndtimeo", 3)
-		ret=socket:connect(s.server,s.server_port)
-		if  tostring(ret) == "true" then
-			socket:close()
-			retstring =retstring .. "<font color='green'>[" .. server_name .. "] OK.</font><br />"
-		else
-			retstring =retstring .. "<font color='red'>[" .. server_name .. "] Error.</font><br />"
-		end
-
-		if  iret== 0 then
-			luci.sys.call(" ipset del ss_spec_wan_ac " .. s.server)
-		end
-	end)
-
-	luci.http.prepare_content("application/json")
-	luci.http.write_json({ ret=retstring })
+    local sockets = require "socket"
+    local set = luci.http.formvalue("host")
+    local port = luci.http.formvalue("port")
+    local retstring = ""
+    local iret = 1
+    iret = luci.sys.call(" ipset add ss_spec_wan_ac " .. set .. " 2>/dev/null")
+    socket = nixio.socket("inet", "stream")
+    socket:setopt("socket", "rcvtimeo", 3)
+    socket:setopt("socket", "sndtimeo", 3)
+    local t0 = sockets.gettime()
+    ret = socket:connect(set, port)
+    if tostring(ret) == "true" then
+        socket:close()
+        retstring = "1"
+    else
+        retstring = "0"
+    end
+    if iret == 0 then
+        luci.sys.call(" ipset del ss_spec_wan_ac " .. set)
+    end
+    local t1 = sockets.gettime()
+    local tt =t1 -t0
+    luci.http.prepare_content("application/json")
+    luci.http.write_json({ret = retstring , used = math.floor(tt*1000 + 0.5)})
 end
+
+
+
+
+
+
