@@ -66,9 +66,15 @@ while [ "1" = "1" ]  #æ­»å¾ªçŽ¯
 do 
 	sleep 30
 #redir tcp
+<<<<<<< HEAD
 	if [ $redir_tcp_process -gt 0 ] ;then
 		icount=`busybox ps -w | grep ssr-retcp |grep -v grep| wc -l`
 		if [ $icount = 0 ] ;then
+=======
+			if [ $redir_tcp_process -gt 0 ] ;then
+			icount=`busybox ps -w | grep ssr-retcp |grep -v grep| wc -l`
+			if [ $icount = 0 ] ;then
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 			logger -t "$NAME" "ssr redir tcp error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") redir tcp error.restart!" >> ${logfile}
 			/etc/init.d/shadowsocksr restart 
@@ -76,9 +82,15 @@ do
 		fi
 	fi
 #redir udp
+<<<<<<< HEAD
 	if [ $redir_udp_process -gt 0 ] ;then
 		icount=`busybox ps -w  | grep ssr-reudp|grep -v grep| wc -l`
 		if [ $icount = 0 ] ;then
+=======
+			if [ $redir_udp_process -gt 0 ] ;then
+			icount=`busybox ps -w  | grep ssr-reudp|grep -v grep| wc -l`
+			if [ $icount = 0 ] ;then
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 			logger -t "$NAME" "ssr redir udp error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") redir udp error.restart!" >> ${logfile}
 			/etc/init.d/shadowsocksr restart 
@@ -86,9 +98,15 @@ do
 		fi
 	fi
 #tunnel
+<<<<<<< HEAD
 	if [ $tunnel_process -gt 0 ] ;then
 		icount=`busybox ps -w  | grep ssr-tunnel |grep -v grep| wc -l`
 		if [ $icount = 0 ] ;then
+=======
+			if [ $tunnel_process -gt 0 ] ;then
+			icount=`busybox ps -w  | grep ssr-tunnel |grep -v grep| wc -l`
+			if [ $icount = 0 ] ;then
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 			logger -t "$NAME" "ssr tunnel error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") tunnel error.restart!" >> ${logfile}
 			/etc/init.d/shadowsocksr restart 
@@ -124,6 +142,7 @@ do
 					/usr/bin/ss-server -c /var/etc/shadowsocksr_$i.json -u -f /var/run/ss-server$i.pid   
 				done
 			fi
+<<<<<<< HEAD
 		fi
 #v2ray_server
 		if [ v2rayserver_process -gt 0 ] ;then
@@ -148,11 +167,34 @@ do
 			logger -t "$NAME" "ssr kcptun error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") ssr kcptun error.restart!" >> ${logfile}
 			killall -q -9 kcptun-client
+=======
+#server
+      if [ $server_process_count -gt 0 ] ;then
+      icount=`busybox ps -w  | grep ssr-server |grep -v grep| wc -l`
+      if [ $icount -lt $server_process_count ]  #Èç¹û½ø³Ì¹Òµô¾ÍÖØÆôËü
+      then
+      logger -t "$NAME" "ssr server error.restart!"
+      killall -q -9 ssr-server 
+      for i in `seq $server_process_count`
+      do
+       /usr/bin/ssr-server -c /var/etc/shadowsocksr_$i.json -u -f /var/run/ssr-server$i.pid   
+      done  
+      fi   
+      fi
+#kcptun
+      if [ $kcp_process -gt 0 ] ;then
+      icount=`busybox ps -w  | grep kcptun-client |grep -v grep| wc -l`
+      if [ $icount -lt $kcp_process ]  #Èç¹û½ø³Ì¹Òµô¾ÍÖØÆôËü
+      then
+      logger -t "$NAME" "ssr kcptun error.restart!"
+      killall -q -9 kcptun-client
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 
 			( /usr/bin/kcptun-client -r $server:$kcp_port -l :$server_port  $password $kcp_param &)
 		fi   
      fi
 #local
+<<<<<<< HEAD
 	if [ $local_process -eq 1 ] ;then
 		icount=`busybox ps -w  | grep ssr-local |grep -v grep| wc -l`
 		if [ $icount -lt $local_process ]  #å¦‚æžœè¿›ç¨‹æŒ‚æŽ‰å°±é‡å¯å®ƒ
@@ -160,10 +202,19 @@ do
 			logger -t "$NAME" "ssr local error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") ssr local error.restart!" >> ${logfile}
 			killall -q -9 ssr-local
+=======
+      if [ $local_process -gt 0 ] ;then
+      icount=`busybox ps -w  | grep ssr-local |grep -v grep| wc -l`
+      if [ $icount -lt $local_process ]  #Èç¹û½ø³Ì¹Òµô¾ÍÖØÆôËü
+      then
+      logger -t "$NAME" "ssr local error.restart!"
+      killall -q -9 ssr-local
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 
 			( /usr/bin/ssr-local -c /var/etc/shadowsocksr_s.json -u -l $sock5_port -f /var/run/ssr-local.pid &)
 		fi   
       fi
+<<<<<<< HEAD
 #local
 	if [ $local_process -eq 2 ] ;then
 		local_processs=1
@@ -182,6 +233,12 @@ do
 		local_processs=1
 		icount=`busybox ps -w  | grep v2-ssr-local |grep -v grep| wc -l`
 		if [ $icount -lt $local_processs ]  #å¦‚æžœè¿›ç¨‹æŒ‚æŽ‰å°±é‡å¯å®ƒ
+=======
+#pdnsd
+		if [ $pdnsd_process -gt 0 ] ;then
+		icount=`busybox ps -w  | grep pdnsd |grep -v grep| wc -l`
+		if [ $icount -lt $pdnsd_process ]  #Èç¹û½ø³Ì¹Òµô¾ÍÖØÆôËü
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 		then
 			logger -t "$NAME" "v2ray local error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") v2ray local error.restart!" >> ${logfile}

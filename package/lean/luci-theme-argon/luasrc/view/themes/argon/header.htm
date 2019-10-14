@@ -229,6 +229,7 @@
 <body class="lang_<%=luci.i18n.context.lang%> <%- if node then %><%= striptags( node.title ) %><%- end %> <% if luci.dispatcher.context.authsession then %>logged-in<% end %>">
 
 <div class="main">
+<<<<<<< HEAD
     <div style="" class="loading">
         <div class="sk-folding-cube">
             <div class="sk-cube1 sk-cube"></div>
@@ -253,6 +254,12 @@
         </div>
         <% render_topmenu() %>
     </div>
+=======
+	 <div style="display:none" class="loading"><span><div class="loading-img"></div>Loading...</span></div>
+	 <div class="main-left">
+		<% render_topmenu() %>
+	 </div>
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 	<div class="main-right">
             <header class="bg-primary">
                 <div class="fill">

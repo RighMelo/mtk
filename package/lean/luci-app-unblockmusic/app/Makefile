@@ -10,8 +10,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-unblockmusic
+<<<<<<< HEAD:package/lean/luci-app-unblockmusic/app/Makefile
 PKG_VERSION:=v2.2.2
 PKG_RELEASE:=10
+=======
+PKG_VERSION:=2.2.0
+PKG_RELEASE:=2
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895:package/lean/luci-app-unblockmusic/Makefile
 
 PKG_LICENSE:=Apache-2.0
 

@@ -47,6 +47,7 @@ end
 
 -- 检测全局服务器状态
 function act_status()
+<<<<<<< HEAD
     local e={}
     --全局服务器
     e.global=luci.sys.call("busybox ps -w | grep ssr-retcp | grep -v grep >/dev/null") == 0  
@@ -235,6 +236,12 @@ function change_node()
     end
     luci.http.prepare_content("application/json")
     luci.http.write_json(e)
+=======
+  local e={}
+  e.running=luci.sys.call("busybox ps -w | grep ssr-retcp | grep -v grep >/dev/null")==0
+  luci.http.prepare_content("application/json")
+  luci.http.write_json(e)
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 end
 
 function act_ping()

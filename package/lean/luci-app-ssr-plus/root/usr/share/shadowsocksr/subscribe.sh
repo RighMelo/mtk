@@ -66,7 +66,7 @@ do
 	echo_date "从 ${subscribe_url[o]} 获取订阅"
 	echo_date "开始更新在线订阅列表..."
 	echo_date "开始下载订阅链接到本地临时文件，请稍等..."
-	subscribe_data=$(wget-ssl --user-agent="User-Agent: Mozilla" --no-check-certificate -T 3 -O- ${subscribe_url[o]})
+	subscribe_data=$(wget-ssl --user-agent="User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" --no-check-certificate -T 3 -O- ${subscribe_url[o]})
 	curl_code=$?
 	# 计算group的hashkey
 	ssr_grouphashkey=$(echo "${subscribe_url[o]}" | md5sum | cut -d ' ' -f1)
@@ -228,5 +228,8 @@ else
 	logger -st $log_name[$$] -p3 "${subscribe_url[$o]} 订阅数据获取失败 错误代码: $curl_code"
 fi
 done
+<<<<<<< HEAD
 echo "0" >/www/lock.htm
+=======
+>>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 /etc/init.d/$name restart >/dev/null 2>&1
