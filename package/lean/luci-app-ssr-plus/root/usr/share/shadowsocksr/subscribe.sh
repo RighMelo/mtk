@@ -228,8 +228,6 @@ else
 	logger -st $log_name[$$] -p3 "${subscribe_url[$o]} 订阅数据获取失败 错误代码: $curl_code"
 fi
 done
-<<<<<<< HEAD
+
 echo "0" >/www/lock.htm
-=======
->>>>>>> 6d7336e59eef1b1f1732324050566635c1bf8895
 /etc/init.d/$name restart >/dev/null 2>&1
