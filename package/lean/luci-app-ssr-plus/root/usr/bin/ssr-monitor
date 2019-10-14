@@ -67,7 +67,7 @@ do
 	sleep 30
 #redir tcp
 	if [ $redir_tcp_process -gt 0 ] ;then
-		icount=`ps -w | grep ssr-retcp |grep -v grep| wc -l`
+		icount=`busybox ps -w | grep ssr-retcp |grep -v grep| wc -l`
 		if [ $icount = 0 ] ;then
 			logger -t "$NAME" "ssr redir tcp error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") redir tcp error.restart!" >> ${logfile}
@@ -77,7 +77,7 @@ do
 	fi
 #redir udp
 	if [ $redir_udp_process -gt 0 ] ;then
-		icount=`ps -w  | grep ssr-reudp|grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep ssr-reudp|grep -v grep| wc -l`
 		if [ $icount = 0 ] ;then
 			logger -t "$NAME" "ssr redir udp error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") redir udp error.restart!" >> ${logfile}
@@ -87,7 +87,7 @@ do
 	fi
 #tunnel
 	if [ $tunnel_process -gt 0 ] ;then
-		icount=`ps -w  | grep ssr-tunnel |grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep ssr-tunnel |grep -v grep| wc -l`
 		if [ $icount = 0 ] ;then
 			logger -t "$NAME" "ssr tunnel error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") tunnel error.restart!" >> ${logfile}
@@ -99,7 +99,7 @@ do
 #ssr_server
 	if [ $server_process_count -gt 0 ] ;then
 		if [ $ssrserver_process -gt 0 ] ;then
-			icount=`ps -w  | grep ssr-server |grep -v grep| wc -l`
+			icount=`busybox ps -w  | grep ssr-server |grep -v grep| wc -l`
 			if [ $icount -lt $ssrserver_process ]  #如果进程挂掉就重启它
 			then
 				logger -t "$NAME" "ssr server error.restart!"
@@ -113,7 +113,7 @@ do
 		fi
 #ss_server
 		if [ $ssserver_process -gt 0 ] ;then
-			icount=`ps -w  | grep ss-server |grep -v grep| wc -l`
+			icount=`busybox ps -w  | grep ss-server |grep -v grep| wc -l`
 			if [ $icount -lt $ssserver_process ]  #如果进程挂掉就重启它
 			then
 				logger -t "$NAME" "ss server error.restart!"
@@ -127,7 +127,7 @@ do
 		fi
 #v2ray_server
 		if [ v2rayserver_process -gt 0 ] ;then
-			icount=`ps -w  | grep ss-server |grep -v grep| wc -l`
+			icount=`busybox ps -w  | grep ss-server |grep -v grep| wc -l`
 			if [ $icount -lt $v2rayserver_process ]  #如果进程挂掉就重启它
 			then
 				logger -t "$NAME" "v2ray server error.restart!"
@@ -142,7 +142,7 @@ do
     fi
 #kcptun
 	if [ $kcp_process -gt 0 ] ;then
-		icount=`ps -w  | grep kcptun-client |grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep kcptun-client |grep -v grep| wc -l`
 		if [ $icount -lt $kcp_process ]  #如果进程挂掉就重启它
 		then
 			logger -t "$NAME" "ssr kcptun error.restart!"
@@ -154,7 +154,7 @@ do
      fi
 #local
 	if [ $local_process -eq 1 ] ;then
-		icount=`ps -w  | grep ssr-local |grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep ssr-local |grep -v grep| wc -l`
 		if [ $icount -lt $local_process ]  #如果进程挂掉就重启它
 		then
 			logger -t "$NAME" "ssr local error.restart!"
@@ -167,7 +167,7 @@ do
 #local
 	if [ $local_process -eq 2 ] ;then
 		local_processs=1
-		icount=`ps -w  | grep ss-local |grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep ss-local |grep -v grep| wc -l`
 		if [ $icount -lt $local_processs ]  #如果进程挂掉就重启它
 		then
 			logger -t "$NAME" "ss local error.restart!"
@@ -180,7 +180,7 @@ do
 #local
 	if [ $local_process -eq 3 ] ;then
 		local_processs=1
-		icount=`ps -w  | grep v2-ssr-local |grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep v2-ssr-local |grep -v grep| wc -l`
 		if [ $icount -lt $local_processs ]  #如果进程挂掉就重启它
 		then
 			logger -t "$NAME" "v2ray local error.restart!"
@@ -192,7 +192,7 @@ do
       fi
 #dnsforwarder
 	if [ $dnsforwarder_process -gt 0 ] ;then
-		icount=`ps -w  | grep dnsparsing |grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep dnsparsing |grep -v grep| wc -l`
 		if [ $icount -lt $dnsforwarder_process ]; then
 			logger -t "$NAME" "dnsforwarder tunnel error.restart!"
 			echo "$(date "+%Y-%m-%d %H:%M:%S") dnsforwarder tunnel error.restart!" >> ${logfile}
@@ -203,7 +203,7 @@ do
 	fi 
 #pdnsd
 	if [ $pdnsd_process -gt 0 ] ;then
-		icount=`ps -w  | grep pdnsd |grep -v grep| wc -l`
+		icount=`busybox ps -w  | grep pdnsd |grep -v grep| wc -l`
 		if [ $icount -lt $pdnsd_process ]  #如果进程挂掉就重启它
 		then
 			logger -t "$NAME" "pdnsd tunnel error.restart!"
@@ -219,7 +219,7 @@ do
 	fi
 #udp2raw
 	if [ $(uci_get_by_type udp2raw udp2raw_enable) = 1 ] ;then
-		ucount=`ps -w | grep udp2raw |grep -v grep| wc -l`
+		ucount=`busybox ps -w | grep udp2raw |grep -v grep| wc -l`
 		if [ $ucount = 0 ] ;then
 			/usr/bin/udp2raw --clear >/dev/null
 			/usr/bin/udp2raw --conf-file /var/etc/udp2raw.conf >/dev/null 2>&1 &
@@ -227,7 +227,7 @@ do
 	fi
 #udpspeeder
 	if [ $(uci_get_by_type udpspeeder udpspeeder_enable) = 1 ] ;then
-		scount=`ps -w | grep udpspeeder |grep -v grep| wc -l`
+		scount=`busybox ps -w | grep udpspeeder |grep -v grep| wc -l`
 		if [ $scount = 0 ] ;then
 			/usr/bin/udpspeeder -c -l0.0.0.0:$(uci_get_by_type udpspeeder local_port) \
 				-r$(uci_get_by_type udpspeeder server):$(uci_get_by_type udpspeeder server_port) \
